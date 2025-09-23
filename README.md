@@ -6,14 +6,14 @@ Projenin amacı: Stack a’yı sınırlı bir komut seti ile minimum hamlede sı
 
 Temel Yapılar: Projede a ve b adında iki stack kullanılır. Başlangıçta tüm sayılar a stackinde bulunur ve b stacki boştur. 
 
-**Input **: tekrarsız, pozitif ya da negatif, integer sayılar. tek bir string içinde de verilebilir birden fazla argüman olarak da verilebilir.
+**Input : ** tekrarsız, pozitif ya da negatif, integer sayılar. tek bir string içinde de verilebilir birden fazla argüman olarak da verilebilir.
 
 örn: 
 
 ./a.out “ 2 1 3 6 “
 ./a.out 2 1 3 6
  
-**Output **:  Verilen inputu artan sırada sıralamak için gerekli komutları yazdırır. 
+**Output : **   Verilen inputu artan sırada sıralamak için gerekli komutları yazdırır. 
 
 örn:
 
