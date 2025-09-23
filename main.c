@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 		return (0);
 
 	//Argümanları al. Kontrol et. Integere çevir. Node oluşturup contentine değeri koy. Listenin sonuna yeni node ekle.
-	build_stack();
+	build_stack(t_list **a, int argc, char **argv);
 
 	//argümanları sort et
 	//sort-----loading-----
