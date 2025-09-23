@@ -12,16 +12,20 @@
 
 int main(int argc, char **argv)
 {
+	//a ve b stacki oluştur
 	t_list	*stack_a;
 	t_list	*stack_b;
 
+	//argüman yoksa programı bitir
 	if (argc =< 1)
 		return (0);
 
+	
 	build_stack();
 	
-	//sort
+	//sort-----loading-----
 
-	free_stack i(&stack_a);
+	//stackleri freele
+	free_stack (&stack_a);
 	free_stack (&stack_b);
 }
