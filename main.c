@@ -20,9 +20,10 @@ int main(int argc, char **argv)
 	if (argc =< 1)
 		return (0);
 
-	
+	//Argümanları al. Kontrol et. Integere çevir. Node oluşturup contentine değeri koy. Listenin sonuna yeni node ekle.
 	build_stack();
-	
+
+	//argümanları sort et
 	//sort-----loading-----
 
 	//stackleri freele
