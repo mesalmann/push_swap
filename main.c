@@ -10,23 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
 int main(int argc, char **argv)
 {
-	//a ve b stacki oluştur
 	t_list	*stack_a;
 	t_list	*stack_b;
 
-	//argüman yoksa programı bitir
-	if (argc =< 1)
+	if (argc <= 1)
 		return (0);
 
-	//Argümanları al. Kontrol et. Integere çevir. Node oluşturup contentine değeri koy. Listenin sonuna yeni node ekle.
-	build_stack(t_list **a, int argc, char **argv);
+	build_stack(stack_a, argc, argv);
+	
+	//sort
 
-	//argümanları sort et
-	//sort-----loading-----
-
-	//stackleri freele
-	free_stack (&stack_a);
-	free_stack (&stack_b);
+	free_list (&stack_a);
+	free_list (&stack_b);
 }

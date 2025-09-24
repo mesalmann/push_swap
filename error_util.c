@@ -9,11 +9,27 @@
 /*   Updated: 2025/09/23 17:49:35 by mesalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//subjecte göre istenmeyen durumlarda Error yazıp programı bitirmeliyiz.
-void	exit_with_error(void)
+
+#include "push_swap.h"
+
+void	free_list(t_list **a)
 {
+	t_list *temp;
+
+	if(!a || !*a)
+		return ;
+	temp = *a;
+	while(*a)
+	{
+		temp = (*a)->next;
+		free(*a);
+		*a = temp;
+	}
+}
+
+void	exit_with_error(t_list **a)
+{
+	free_list(a);
 	write(2, "Error\n", 6);
 	exit(1);
-	//return 0; bulunulan fonksiyonu sona erdirir.
-	//exit() hangi fonksiyondan çağırıldığı fark etmeksizin tüm programı bitirir. 
 }

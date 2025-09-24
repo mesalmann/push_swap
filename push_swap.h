@@ -25,6 +25,11 @@ typedef struct s_list {
 
 void	exit_with_error(void);
 
+int		ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
+t_list	*ft_lstlast(t_list *lst);
+
 void	sa(t_list **a);
 void	sb(t_list **b);
 void	ss(t_list **a, t_list **b);

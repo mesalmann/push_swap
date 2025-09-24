@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
 static void	swap(t_list **c)
 {
 	t_list	*first;
 	t_list	*second;
 
-	(!c || !*c || !(*c)->next)
+	if(!c || !*c || !(*c)->next)
 		return ;
 	first = *c;
 	second = (*c)->next;
