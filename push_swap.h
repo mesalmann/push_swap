@@ -19,7 +19,7 @@
 # include <stddef.h>
 
 typedef struct s_list {
-	void			*content;
+	int			content;
 	struct s_list	*next;
 }	t_list;
 
@@ -43,6 +43,13 @@ void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
 
 void	build_stack(t_list **a, int argc, char **argv);
+
+void	sort_stack(t_list **a, t_list **b);
+void	sort_three(t_list **a);
+void	sort_two(t_list **a);
+int	is_sorted(t_list **a);
+int	is_sorted(t_list **a);
+int	ft_list_size(t_list **a);
 
 void	free_stack(t_list **lst);
 

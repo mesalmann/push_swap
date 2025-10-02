@@ -1,64 +1,98 @@
-/* **************** ********************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sort_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mesalman <mesalman@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/26 12:45:47 by mesalman          #+#    #+#             */
-/*   Updated: 2025/09/26 15:57:48 by mesalman         ###   ########.fr       */
+/*   Created: 2025/10/02 12:34:32 by mesalman          #+#    #+#             */
+/*   Updated: 2025/10/02 12:35:18 by mesalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_list_size(t_list **a)
+#include "push_swap.h"
+
+int	ft_list_size(t_list *a)
 {
 	int size = 0;
-	while(*a)
+	while (a)
 	{
 		size++;
-		*a = (*a)->next;
+		a = a->next;
 	}
-	return(size);
+	return size;
 }
 
-int	is_sorted(t_list **a)
+int	is_sorted(t_list *a)
 {
-	while(*a)
+	while (a && a->next)
 	{
-		if((*a)->content >= (*a)->next->content)
-			return (0);
-		*a = (*a)->next;
+		if (a->content > a->next->content)
+			return 0;
+		a = a->next;
 	}
-	return(1);
+	return 1;
 }
+
+int	find_position(t_list *tmp, int target)
+{
+	int pos = 0;
+
+	while (tmp)
+	{
+		if (tmp->content == target)
+			return pos;
+		tmp = tmp->next;
+		pos++;
+	}
+	return -1;
+}
+
+void	up(t_list **a, int pos, int size)
+{
+	int i = 0;
+
+	if (pos < 0 || size <= 1)
+		return;
+	if (pos <= size / 2)
+		while (i++ < pos)
+			ra(a);
+	else
+		while (i++ < size - pos)
+			rra(a);
+}
+
 
 void	sort_two(t_list **a)
 {
-	sa(*a);
+	if (!a || !*a || !(*a)->next)
+		return;
+	if ((*a)->content > (*a)->next->content)
+		sa(a);
 }
 
 void	sort_three(t_list **a)
 {
-	int	top;
-	int 	mid;
-	int	bot;
+	int x, y, z;
 
-	top = (*a)->content;
-	mid = (*a)->next->content;
-	bot = (*a)->next->next->content;
+	if (!a || !*a || !(*a)->next || !(*a)->next->next)
+		return;
+	x = (*a)->content;
+	y = (*a)->next->content;
+	z = (*a)->next->next->content;
 
-	if (mid >= top && bot >= top)
+	if (x > y && x < z)                      /* 2 1 3 */
 		sa(a);
-	else if (mid >=top && mid >= bot)
-		rra(a);
-	else if (top >= mid && top >= bot)
+	else if (x > y && y > z)                 /* 3 2 1 */
 	{
 		sa(a);
 		rra(a);
 	}
-	else if (top >= mid && bot >= mid)
+	else if (x > z && y < z)                 /* 3 1 2 */
 		ra(a);
-	else
+	else if (x < y && x > z)                 /* 2 3 1 */
+		rra(a);
+	else if (x < y && y > z && x < z)        /* 1 3 2 */
 	{
 		sa(a);
 		ra(a);
@@ -67,47 +101,50 @@ void	sort_three(t_list **a)
 
 void	sort_maxfive(t_list **a, t_list **b)
 {
-	t_list	*iter;
-	t_list	*temp;
-	t_list	*min_node;
-	int	min;
-	
-	temp = *a;
-	iter = *a;
-	min_node = *a;
-	min = (*a)->content;
-	
-	while (iter->next)
+	int     size;
+	int     pos;
+	int     min;
+	t_list  *tmp;
+
+	size = ft_list_size(*a);
+	while (size > 3)
 	{
-		if (iter->content < min)	
+		/* min'i bul */
+		tmp = *a;
+		min = tmp->content;
+		while (tmp)
 		{
-			min = iter->content;
-			min_node = iter;
+			if (tmp->content < min)
+				min = tmp->content;
+			tmp = tmp->next;
 		}
-		iter = iter->next;
+		/* min'i tepeye getir ve b'ye it */
+		pos = find_position(*a, min);
+		up(a, pos, size);
+		pb(a, b);
+		size--;
 	}
-	
-	if (min_node != *a)
-	{	
-		while(temp->next != min_node)
-		{
-			temp = temp->next;
-		}
-		temp->next = temp->next->next;
-		min_node->next = *a;
-		*a = min_node;
-	}
-	pb(b, a);
+	/* kalan 3'ü sırala ve geri topla */
 	sort_three(a);
-	pa(a, b);
+	while (*b)
+		pa(a, b);
 }
 
 void	sort_stack(t_list **a, t_list **b)
 {
-	int	size;
+	int size;
 
-	size = ft_lst_size(*a);
-	
+	if (!a || !*a)
+		return;
 	if (is_sorted(*a))
-		return ;		
-} 
+		return;
+
+	size = ft_list_size(*a);
+	if (size == 2)
+		sort_two(a);
+	else if (size == 3)
+		sort_three(a);
+	else if (size <= 5)
+		sort_maxfive(a, b);
+	/* else: daha büyük boyutlar için radix/chunk vs. */
+}

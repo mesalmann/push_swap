@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 
 	build_stack(stack_a, argc, argv);
 	
-	//sort
+	sort_stack(stack_a, stack_b);
 
 	free_list (&stack_a);
 	free_list (&stack_b);
