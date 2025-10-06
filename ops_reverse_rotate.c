@@ -30,16 +30,35 @@ static void	reverse_rotate(t_list **a)
 
 void	rra(t_list **a)
 {
+	 if (!a || !*a || !(*a)->next) 
+	 	return;
 	reverse_rotate(a);
+	write(1, "rra\n", 4);
 }
 
 void	rrb(t_list **b)
 {
+	if (!b || !*b || !(*b)->next) 
+		return;
 	reverse_rotate(b);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_list **a, t_list **b)
 {
-	reverse_rotate(a);
-	reverse_rotate(b);
+	int	flag;
+	
+	flag = 0;
+	if (a && *a && (*a)->next)
+	{
+		reverse_rotate(a);
+		flag = 1;
+	}
+	if (b && *b && (*b)->next)
+	{
+		reverse_rotate(b);
+		flag = 1;
+	}
+	if (flag)
+		write(1, "rrr\n", 4);
 }

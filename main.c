@@ -19,11 +19,15 @@ int main(int argc, char **argv)
 
 	if (argc <= 1)
 		return (0);
+	stack_a = NULL;
+	stack_b = NULL;
 
-	build_stack(stack_a, argc, argv);
+	build_stack(&stack_a, argc, argv);
 	
-	sort_stack(stack_a, stack_b);
+	sort_stack(&stack_a, &stack_b);
 
-	free_list (&stack_a);
-	free_list (&stack_b);
+	free_stack (&stack_a);
+	free_stack (&stack_b);
+	
+	return (0);
 }

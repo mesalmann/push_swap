@@ -23,12 +23,7 @@ typedef struct s_list {
 	struct s_list	*next;
 }	t_list;
 
-void	exit_with_error(void);
-
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
-t_list	*ft_lstlast(t_list *lst);
+void	exit_with_error(t_list **a);
 
 void	sa(t_list **a);
 void	sb(t_list **b);
@@ -47,9 +42,9 @@ void	build_stack(t_list **a, int argc, char **argv);
 void	sort_stack(t_list **a, t_list **b);
 void	sort_three(t_list **a);
 void	sort_two(t_list **a);
-int	is_sorted(t_list **a);
-int	is_sorted(t_list **a);
-int	ft_list_size(t_list **a);
+void    sort_large(t_list **a, t_list **b);
+int	is_sorted(t_list *a);
+int	ft_list_size(t_list *a);
 
 void	free_stack(t_list **lst);
 

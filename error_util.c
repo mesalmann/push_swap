@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	free_list(t_list **a)
+void	free_stack(t_list **a)
 {
 	t_list *temp;
 
@@ -29,7 +29,7 @@ void	free_list(t_list **a)
 
 void	exit_with_error(t_list **a)
 {
-	free_list(a);
+	free_stack(a);
 	write(2, "Error\n", 6);
 	exit(1);
 }

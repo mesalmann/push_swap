@@ -26,10 +26,16 @@ static void	push(t_list **c, t_list **d)
 
 void	pb(t_list **a, t_list **b)
 {
+	if (!a || !*a) 
+		return;
 	push(a, b);
+	write(1, "pb\n", 3);
 }
 
-void	pb(t_list **a, t_list **b)
+void	pa(t_list **a, t_list **b)
 {
+	if (!b || !*b) 
+		return;
 	push(b, a);
+	write(1, "pa\n", 3);
 }

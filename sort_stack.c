@@ -34,7 +34,7 @@ int	is_sorted(t_list *a)
 	return 1;
 }
 
-int	find_position(t_list *tmp, int target)
+static int	find_position(t_list *tmp, int target)
 {
 	int pos = 0;
 
@@ -48,7 +48,7 @@ int	find_position(t_list *tmp, int target)
 	return -1;
 }
 
-void	up(t_list **a, int pos, int size)
+static void	up(t_list **a, int pos, int size)
 {
 	int i = 0;
 
@@ -144,7 +144,6 @@ void	sort_stack(t_list **a, t_list **b)
 		sort_two(a);
 	else if (size == 3)
 		sort_three(a);
-	else if (size <= 5)
-		sort_maxfive(a, b);
-	/* else: daha büyük boyutlar için radix/chunk vs. */
+	else if (size > 3)
+		sort_large(a, b);
 }

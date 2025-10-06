@@ -28,16 +28,35 @@ static void	swap(t_list **c)
 
 void	sa(t_list **a)
 {
+	if (!a || !*a || !(*a)->next)
+		return ;
 	swap (a);
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_list **b)
 {
+	if (!b || !*b || !(*b)->next)
+		return ;
 	swap (b);
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_list **a, t_list **b)
 {
-	swap(a);
-	swap(b);
+	int	flag;
+	
+	flag = 0;
+	if (a && *a && (*a)->next)
+	{
+		swap(a);
+		flag = 1;
+	}
+	if (b && *b && (*b)->next)
+	{
+		swap(b);
+		flag = 1;
+	}
+	if (flag)
+		write(1, "ss\n", 3);
 }

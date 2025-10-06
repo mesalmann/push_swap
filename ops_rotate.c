@@ -30,16 +30,35 @@ static void	rotate(t_list **c)
 
 void	ra(t_list **a)
 {
+ 	if (!a || !*a || !(*a)->next) 
+ 		return;
 	rotate(a);
+	write(1, "ra\n", 3);
 }
 
 void	rb(t_list **b)
 {
+	if (!b || !*b || !(*b)->next) 
+ 		return;
 	rotate(b);
+	write(1, "rb\n", 3);
 }
 
 void	rr(t_list **a, t_list **b)
 {
-	rotate(a);
-	rotate(b);
+	int	flag;
+	
+	flag = 0;
+	if (a && *a && (*a)->next)
+	{
+		rotate(a);
+		flag = 1;
+	}
+	if (b && *b && (*b)->next)
+	{
+		rotate(b);
+		flag = 1;
+	}
+	if (flag)
+		write(1, "rr\n", 3);
 }

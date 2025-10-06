@@ -7,13 +7,15 @@ SRCS =	main.c \
 		ops_push.c \
 		ops_rotate.c \
 		ops_reverse_rotate.c \
-		ops_swap.c
+		ops_swap.c \
+		sort_stack.c \
+		alg.c
 
 OBJS = $(SRCS:.c=.o)
 
 HDRS = push_swap.h
 
-all: $(NAME)
+all:	$(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
@@ -28,6 +30,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
 
 .PHONY: all clean fclean re
