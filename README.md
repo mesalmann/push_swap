@@ -36,3 +36,28 @@ array : a dizisinin başındaki elemanı aldıktan sonra tüm dizideki elemanlar
 linked list: a listesinin başındaki düğümü al. Yeni başlangıcı ikinci düğüm yap. Aldığın düğümü b nin başına yönlendir. B listesinin yeni başlangıcını bu düğüm yap. Listenin eleman sayısı kaç olursa olsun bu işlem burada sadece 4 hamlede gerçekleşir. Arraye kıyasla çok hızlı sürer (O(1)).
 
 
+
+
+-------------------
+Turk Algoritması
+
+A yığınındaki tüm sayıları minimum hamleyle B’ye taşıyıp, ardından sıralı biçimde geri A’ya yerleştirmektir.
+
+1- İlk iki sayıyı B’ye gönder.
+while -- sizeof_stack_a != 3 {
+2- Sonraki atılacak sayı için A'daki tüm sayıların B'ye atılma maliyetini hesapla.
+
+Maliyet hesabı : 
+a) Maliyeti hesaplanacak sayının B stackinde kendinden küçük en büyük sayıyı yoksa en büyük sayıyı bul. Yani match sayısını bul.
+b) Maliyeti hesaplanıcak sayıyı stackin en üstüne getirmek için gereken hamle sayısını hesapla.
+c) Match sayısını B stackinde en üste getirmek için gereken hamle sayısını hesapla
+d) Bunları topla ve +1 ekle (push b maliyeti için +1 eklenir).
+
+3- A stackinden B stackine atılmak için maliyeti en düşük olan sayı yani best_cost bulununca best_costu stackin en üstüne getir.
+4- Best_costun matchini B stackinde en üste getir.
+5- push b yap ve best_costu b stackinde matchinin üstüne pushla.
+}
+6- A stackinde 3 sayı kaldığı an döngü bitecek.
+7- Sort three fonksiyonuyla kalan 3 lüyü sırala.
+8- B stackindeki geri A ya pushlamamız gerekiyor. Gönderilecek sayımızın adaki matchini ararız. Kendinden büyük en küçük sayı yoksa en küçük sayı matchtir.
+9- B stackindeki sayıları sırayla matchlerinin üstüne göndeririz.
