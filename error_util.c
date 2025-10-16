@@ -6,7 +6,7 @@
 /*   By: mesalman <mesalman@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:48:25 by mesalman          #+#    #+#             */
-/*   Updated: 2025/09/23 17:49:35 by mesalman         ###   ########.fr       */
+/*   Updated: 2025/10/11 15:48:17 by mesalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	free_stack(t_list **a)
 {
-	t_list *temp;
+	t_list	*temp;
 
-	if(!a || !*a)
+	if (!a || !(*a))
 		return ;
 	temp = *a;
-	while(*a)
+	while (*a)
 	{
 		temp = (*a)->next;
 		free(*a);

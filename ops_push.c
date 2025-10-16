@@ -6,7 +6,7 @@
 /*   By: mesalman <mesalman@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:33:43 by mesalman          #+#    #+#             */
-/*   Updated: 2025/09/23 17:38:12 by mesalman         ###   ########.fr       */
+/*   Updated: 2025/10/11 15:55:18 by mesalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static void	push(t_list **c, t_list **d)
 
 void	pb(t_list **a, t_list **b)
 {
-	if (!a || !*a) 
-		return;
+	if (!a || !(*a))
+		return ;
 	push(a, b);
 	write(1, "pb\n", 3);
 }
 
 void	pa(t_list **a, t_list **b)
 {
-	if (!b || !*b) 
-		return;
+	if (!b || !(*b))
+		return ;
 	push(b, a);
 	write(1, "pa\n", 3);
 }

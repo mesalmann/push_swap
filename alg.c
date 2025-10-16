@@ -1,192 +1,101 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alg.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mesalman <mesalman@student.42istanbul.com  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 19:18:27 by mesalman          #+#    #+#             */
+/*   Updated: 2025/10/16 19:18:41 by mesalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int find_index(t_list *head, int v)
+static void	push_back_to_a(t_list **a, t_list **b)
 {
-    t_list	*tmp;
-	int		i;
-	
-	i = 0;
-	tmp = head;
-	while (tmp)
+	int	target;
+	int	pos;
+
+	while (*b)
 	{
-		if (tmp->content == v)
-			return (i);
-		tmp = tmp->next;
-		i++;
+		target = find_target_in_a(*a, (*b)->content);
+		pos = find_index(*a, target);
+		if (pos >= 0 && ft_list_size(*a) > 1)
+			make_head_a(a, pos, ft_list_size(*a));
+		pa(a, b);
 	}
-	return (-1);
 }
 
-int count(int pos, int size)
+static void	cost_calc(t_list **a, t_list **b, int *best_a, int *best_b)
 {
-    if (pos < 0 || size <= 1)
-        return (0);
-    if (pos <= size / 2)
-        return (pos);
-    else
-        return (size - pos);
-}
-
-int find_cost(t_list *a, int val)
-{
-    int size_a;
-    int pos_a;
-    
-    size_a = ft_list_size(a);
-    pos_a = find_index(a, val);
-    return (count(pos_a, size_a));
-}
-
-int min_val(int c, t_list *b)
-{
-    t_list	*temp;
-	int		flag;
+	t_list	*cur;
 	int		match;
-	int		max;
-	
-	if (!b)
-		return (0);
-	flag = 0;
-	match = 0;
-	max = b->content;
-	temp = b;
-	while (temp)
+	int		best_c;
+	int		cost;
+
+	cur = *a;
+	match = find_target_in_b(cur->content, *b);
+	best_c = find_cost(*a, cur->content) + find_cost(*b, match) + 1;
+	*best_a = cur->content;
+	*best_b = match;
+	cur = cur->next;
+	while (cur)
 	{
-		if (temp->content > max)
-			max = temp->content;
-		temp = temp->next;
-	}
-	temp = b;
-	while (temp)
-	{
-		if (temp->content < c && (!flag || temp->content > match))
+		match = find_target_in_b(cur->content, *b);
+		cost = find_cost(*a, cur->content) + find_cost(*b, match) + 1;
+		if (cost < best_c)
 		{
-			match = temp->content;
-			flag = 1;
+			best_c = cost;
+			*best_a = cur->content;
+			*best_b = match;
 		}
-		temp = temp->next;
+		cur = cur->next;
 	}
-	if (flag)
-		return (match);
-	return (max);
 }
 
-void    make_head(t_list **a, int pos, int size)
+static void	push_to_b_with_min_cost(t_list **a, t_list **b)
 {
-    int i;
-    
-    i = 0;
-	if (pos < 0 || pos >= size || size <= 1)
-		return;
-	if (pos <= size / 2)
+	int	best_a;
+	int	best_b;
+	int	x;
+	int	y;
+
+	while (ft_list_size(*a) > 3)
 	{
-		while (i++ < pos)
-			ra(a);
-	}
-	else
-	{
-		while (i++ < size - pos)
-			rra(a);
+		cost_calc(a, b, &best_a, &best_b);
+		x = find_index(*a, best_a);
+		y = find_index(*b, best_b);
+		make_head_a(a, x, ft_list_size(*a));
+		make_head_b(b, y, ft_list_size(*b));
+		pb(a, b);
 	}
 }
-static int find_target_in_a(t_list *a, int b_val)
+
+void	sort_large(t_list **a, t_list **b)
 {
-   t_list	*temp;
-	int		flag;
-	int		match;
+	t_list	*t;
 	int		min;
-	
-	if (!a)
-		return (0);
-	flag = 0;
-	match = 0;
-	min = a->content;
-	temp = a;
-	while (temp)
+	int		pos_a;
+
+	if (!a || !(*a) || !(*a)->next)
+		return ;
+	pb(a, b);
+	if (ft_list_size(*a) != 3)
+		pb(a, b);
+	push_to_b_with_min_cost(a, b);
+	sort_three(a);
+	push_back_to_a(a, b);
+	t = *a;
+	min = t->content;
+	t = t->next;
+	while (t)
 	{
-		if (temp->content < min)
-			min = temp->content;
-		temp = temp->next;
+		if (t->content < min)
+			min = t->content;
+		t = t->next;
 	}
-	temp = a;
-	while (temp)
-	{
-		if (temp->content > b_val && (!flag || temp->content < match))
-		{
-			match = temp->content;
-			flag = 1;
-		}
-		temp = temp->next;
-	}
-	if (flag)
-		return (match);
-	return (min);
-}
-
-static void push_back_to_a(t_list **a, t_list **b)
-{
-    int target;
-    
-    while (*b)
-    {
-        target = find_target_in_a(*a, (*b)->content);
-        make_head(a, find_index(*a, target), ft_list_size(*a));
-        pa(a, b);
-    }
-}
-
-void    sort_large(t_list **a, t_list **b)
-{
-    t_list  *curr;
-    int     match;
-    int     best_cost;
-    int     best_a_val;
-    int     best_b_match;
-    int     cost;
-    
-    if (!a || !*a || !(*a)->next)
-        return ;
-    pb(a, b);
-    pb(a, b);
-    
-    while (ft_list_size(*a) > 3)
-    {
-        curr = *a;
-        match = min_val(curr->content, *b);
-        best_cost = find_cost(*a, curr->content) + find_cost(*b, match) + 1;
-        best_a_val = curr->content;
-        best_b_match = match;
-        
-        curr = *a;
-        while (curr)
-        {
-            match = min_val(curr->content, *b);
-            cost = find_cost(*a, curr->content) + find_cost(*b, match) + 1;
-            if (cost < best_cost)
-            {
-                best_cost = cost;
-                best_a_val = curr->content;
-                best_b_match = match;
-            }
-            curr = curr->next;
-        }
-        make_head(a, find_index(*a, best_a_val), ft_list_size(*a));
-        make_head(b, find_index(*b, best_b_match), ft_list_size(*b));
-        pb(a, b);
-    }
-    sort_three(a);
-    push_back_to_a(a, b);
-
-     int     min;
-    t_list  *t;
-
-    t = *a;
-    min = t->content;
-    while (t)
-    {
-        if (t->content < min)
-            min = t->content;
-        t = t->next;
-    }
-    make_head(a, find_index(*a, min), ft_list_size(*a));
+	pos_a = find_index(*a, min);
+	if (pos_a >= 0 && ft_list_size(*a) > 1)
+		make_head_a(a, pos_a, ft_list_size(*a));
 }

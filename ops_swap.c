@@ -6,7 +6,7 @@
 /*   By: mesalman <mesalman@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:25:56 by mesalman          #+#    #+#             */
-/*   Updated: 2025/09/23 17:33:09 by mesalman         ###   ########.fr       */
+/*   Updated: 2025/10/11 15:54:00 by mesalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	swap(t_list **c)
 	t_list	*first;
 	t_list	*second;
 
-	if(!c || !*c || !(*c)->next)
+	if (!c || !*c || !(*c)->next)
 		return ;
 	first = *c;
 	second = (*c)->next;
@@ -45,7 +45,7 @@ void	sb(t_list **b)
 void	ss(t_list **a, t_list **b)
 {
 	int	flag;
-	
+
 	flag = 0;
 	if (a && *a && (*a)->next)
 	{

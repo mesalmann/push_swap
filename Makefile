@@ -3,14 +3,17 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS =	main.c \
 		build_stack.c \
+		build_stack_utils.c \
 		error_util.c \
 		ops_push.c \
 		ops_rotate.c \
 		ops_reverse_rotate.c \
 		ops_swap.c \
 		sort_stack.c \
-		alg.c
-
+		alg.c \
+		alg_util.c \
+		alg_match.c 
+		
 OBJS = $(SRCS:.c=.o)
 
 HDRS = push_swap.h

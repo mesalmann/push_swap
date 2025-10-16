@@ -6,7 +6,7 @@
 /*   By: mesalman <mesalman@student.42istanbul.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 17:42:38 by mesalman          #+#    #+#             */
-/*   Updated: 2025/09/23 17:46:17 by mesalman         ###   ########.fr       */
+/*   Updated: 2025/10/11 15:53:30 by mesalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	rotate(t_list **c)
 	t_list	*first;
 	t_list	*tail;
 
-	if (!c || !*c || !(*c)->next)
+	if (!c || !(*c) || !(*c)->next)
 		return ;
 	first = *c;
 	tail = *c;
@@ -30,16 +30,16 @@ static void	rotate(t_list **c)
 
 void	ra(t_list **a)
 {
- 	if (!a || !*a || !(*a)->next) 
- 		return;
+	if (!a || !(*a) || !(*a)->next)
+		return ;
 	rotate(a);
 	write(1, "ra\n", 3);
 }
 
 void	rb(t_list **b)
 {
-	if (!b || !*b || !(*b)->next) 
- 		return;
+	if (!b || !(*b) || !(*b)->next)
+		return ;
 	rotate(b);
 	write(1, "rb\n", 3);
 }
@@ -47,7 +47,7 @@ void	rb(t_list **b)
 void	rr(t_list **a, t_list **b)
 {
 	int	flag;
-	
+
 	flag = 0;
 	if (a && *a && (*a)->next)
 	{
